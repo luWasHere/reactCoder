@@ -1,0 +1,74 @@
+.products {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  @include flex(row, wrap, center, flex-start);
+  gap: 30px;
+
+  .product {
+    @include flex(column, initial, initial, initial);
+    overflow: hidden;
+    width: 300px;
+    border-radius: 10px;
+
+    figure {
+      @include flex(column, initial, initial, center);
+      position: relative;
+      outline: green 2px solid;
+      width: 100%;
+      height: 100%;
+      background: $darkmain;
+
+      &::before {
+        content: " ";
+        position: absolute;
+        z-index: 10;
+        bottom: 0;
+        width: 50%;
+        height: 65px;
+        background-color: #4478e767;
+        filter: blur(50px);
+      }
+
+      img {
+        position: relative;
+        z-index: 20;
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      p {
+        display: none;
+      }
+
+      figcaption {
+        text-align: center;
+        position: relative;
+        z-index: 20;
+        font-size: 1.6rem;
+        font-weight: 700;
+        padding: 10px;
+        color: #fff;
+      }
+
+      button {
+        position: relative;
+        z-index: 20;
+        margin-bottom: 16px;
+        margin-top: 10px;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        background: $buttons;
+        color: #ddd;
+        font-size: 1rem;
+        cursor: pointer;
+
+        &:hover {
+          filter: brightness(110%);
+          transition: all 0.2s;
+        }
+      }
+    }
+  }
+}

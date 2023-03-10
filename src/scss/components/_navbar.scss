@@ -1,0 +1,105 @@
+nav {
+  @include flex(row, initial, space-between, center);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  backdrop-filter: blur(5px) brightness(30%);
+  background: linear-gradient($lightmain, transparent);
+  color: #ddd;
+  padding: 14px 18px;
+  text-decoration: none;
+  height: 65px;
+  user-select: none;
+  
+
+  .logo {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $titles;
+  }
+
+  .ul {
+    @include flex(row, initial, center, center);
+    list-style: none;
+    gap: 18px;
+
+    li {
+      position: relative;
+    }
+
+    li:hover {
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .categoriesBtn {
+      height: 65px;
+      @include flex (initial, initial, center, center);
+    }
+
+    .categoriesBtn:hover ~ .categoriesContainer {
+      top: 65px;
+      opacity: 1;
+    }
+  }
+}
+
+.cart {
+  position: relative;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #ddd;
+
+  &:hover {
+    color: #fff;
+    transition: all 0.2s;
+  }
+
+  .counter {
+    @include flex(initial, initial, center, center);
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: red;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    font-size: 1rem;
+  }
+}
+
+.categoriesContainer {
+  position: absolute;
+  z-index: -1;
+  @include flex (initial, initial, flex-start, initial);
+  top: -300%;
+  opacity: 0;
+  right: 0px;
+  padding: 20px 30px 20px 20px;
+  background: rgba(12, 20, 37, 0.904);
+  border-radius: 0 0 0 12px;
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.66);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.66);
+  box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.66);
+  transition: opacity .2s;
+
+  backdrop-filter: blur(5px) brightness(20%);
+
+
+  &:hover {
+    top: 65px;
+    opacity: 1;
+  }
+
+  .categories {
+    @include flex (column, initial, center, flex-start);
+    gap: 10px;
+    list-style: none;
+
+    li {
+      font-size: 1rem;
+    }
+    
+  }
+}

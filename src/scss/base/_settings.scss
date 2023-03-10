@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&display=swap');
+
+* {
+    font-family: 'Cabin', sans-serif;
+}
+
+body {
+    background: rgb(10, 13, 20);
+    color: #ddd;
+}
+
+body::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: rgb(23, 31, 51);
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background-color: rgba(36, 68, 131, 0.473);;
+    border-radius: 20px;
+  }
