@@ -5,11 +5,12 @@
 
 // Base
 
-@import "./base/settings";
+@import "./base/_settings";
 @import "./base/_normalize";
 
 // Components
 
-@import "./components/itemListContainer";
-@import "./components/navbar";
-@import "./components/itemDetails";
+@import "./components/_itemListContainer";
+@import "./components/_navbar";
+@import "./components/_itemDetail";
+@import "./components/_cart";

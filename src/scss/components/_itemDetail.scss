@@ -1,0 +1,98 @@
+.detailContainer {
+  @include flex(row, initial, initial, initial);
+  gap: 20px;
+  max-width: 1200px;
+  width: 90%;
+  margin: 40px auto 0 auto;
+
+  .imgContainer {
+    width: fit-content;
+    height: 500px;
+    border-radius: 14px;
+    -webkit-box-shadow: 0px 0px 25px 0px rgba(0, 132, 255, 0.3);
+    -moz-box-shadow: 0px 0px 25px 0px rgba(0, 132, 255, 0.3);
+    box-shadow: 0px 0px 25px 0px rgba(0, 132, 255, 0.3);
+    img {
+      aspect-ratio: 1.2 / 1;
+      height: 500px;
+      object-fit: cover;
+      border-radius: 14px;
+    }
+  }
+
+  .infoContainer {
+    position: relative;
+    h1 {
+      margin-bottom: 8px;
+      color: $titles;
+    }
+    .rating {
+      @include flex(row, initial, initial, center);
+      gap: 8px;
+
+      p {
+        font-size: 1.4rem;
+      }
+      i {
+        margin: 1.5px;
+      }
+    }
+    .price {
+      margin-top: 16px;
+
+      h2 {
+        font-size: 0.8rem;
+      }
+      h3 {
+        margin-top: 4px;
+        font-size: 2.4rem;
+      }
+    }
+    .description {
+      margin-top: 28px;
+      font-size: 0.9rem;
+      width: 90%;
+    }
+
+    .btns {
+      position: absolute;
+      bottom: 25px;
+      @include flex(row, initial, initial, center);
+      gap: 10px;
+
+      button {
+        cursor: pointer;
+        font-weight: 800;
+        outline: none;
+        border: none;
+        border-radius: 6px;
+  
+        &:hover {
+          filter: brightness(110%);
+          transition: all .2s;
+        }
+      }
+
+      .addToCart {
+        padding: 10px 30px;
+        background: $lightmain;
+        color: #ccc;
+        margin-right: 8px;
+      }
+
+      .sum, .rest {
+        padding: 0 10px;
+        font-size: 1.6rem;
+        background: none;
+        color: #ccc;
+        outline: 1px solid #aaa;
+      }
+
+      .quantity {
+        width: 16px;
+        @include flex(row, initial, center, center);
+        font-size: 1.2rem;
+      }
+    }
+  }
+}

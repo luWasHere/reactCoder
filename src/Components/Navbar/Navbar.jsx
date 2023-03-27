@@ -1,4 +1,4 @@
-import Cart from "./Cart"
+import CartWidget from "./CartWidget"
 import { Link } from "react-router-dom"
 import Categories from "./Categories"
 
@@ -13,7 +13,7 @@ const Navbar = () => {
           <li>All products</li>
         </Link>
         <li className="categoriesBtn">Categories</li>
-        <Cart />
+        <CartWidget />
         <Categories />
       </ul>
     </nav>

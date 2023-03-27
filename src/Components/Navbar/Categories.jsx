@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import { allCategories } from "../../js/functions"
+import axios from "axios"
 
 const Categories = () => {
   const [categories, setCategories] = useState(null)
+
+  const allCategories = async (state) => {
+    const pet = await axios.get("https://fakestoreapi.com/products/categories")
+    state(pet.data)
+  }
 
   useEffect(() => {
     allCategories(setCategories)

@@ -1,0 +1,90 @@
+.cartContainer {
+  @include flex(column, initial, center, center);
+  gap: 16px;
+  width: 900px;
+  margin: 40px auto 0 auto;
+
+  .cartProduct {
+    width: 100%;
+    display: grid;
+    gap: 0px;
+    grid-template-columns: 72% auto auto;
+    align-items: center;
+    justify-items: start;
+    justify-content: space-between;
+
+    figure {
+      @include flex(initial, initial, center, center);
+      gap: 10px;
+      img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+      }
+    }
+
+    .quantityContainer {
+      @include flex(initial, initial, initial, initial);
+      gap: 10px;
+      .sum,
+      .rest {
+        padding: 0 10px;
+        font-size: 1.6rem;
+        background: none;
+        color: #ccc;
+        outline: 1px solid #aaa;
+        cursor: pointer;
+        font-weight: 800;
+        border: none;
+        border-radius: 6px;
+
+        &:hover {
+          filter: brightness(110%);
+          transition: all 0.2s;
+        }
+      }
+      .quantity {
+        width: 16px;
+        @include flex(row, initial, center, center);
+        font-size: 1.2rem;
+      }
+    }
+
+    h2 {
+      width: 100px;
+      font-size: 1.3rem;
+    }
+  }
+
+  .total {
+    width: 100%;
+    @include flex(column, initial, center, center);
+    gap: 2px;
+    h2 {
+      color: $titles;
+      font-size: 1rem;
+    }
+    .price {
+      font-size: 2rem;
+      font-weight: 800;
+    }
+
+    button {
+      margin-top: 10px;
+      width: 20%;
+      outline: none;
+      border: none;
+      padding: 10px;
+      background: rgb(15, 85, 15);
+      color: #ddd;
+      cursor: pointer;
+      font-weight: 800;
+      border-radius: 6px;
+
+      &:hover {
+        filter: brightness(110%);
+        transition: all 0.2s;
+      }
+    }
+  }
+}
