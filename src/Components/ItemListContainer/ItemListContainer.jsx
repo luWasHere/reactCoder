@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import axios from "axios"
+import Loader from "../Loader/Loader"
+import { db } from "../../firebaseConfig"
+import { collection, getDocs } from "firebase/firestore"
 
 const ItemListContainer = () => {
   const { categoryName } = useParams()
 
   const [products, setProducts] = useState([])
 
-  const getProducts = async (state, category) => {
+  const getProducts = async (state) => {
     const pet = await axios.get("https://fakestoreapi.com/products")
 
     if (categoryName !== undefined) {
@@ -36,25 +39,27 @@ const ItemListContainer = () => {
     }
   }
 
+  if (products.length === 0) {
+    return <Loader />
+  }
+
   return (
     <div className="products">
-      {products
-        ? products.map((p) => {
-            shortenTitle(p)
-            return (
-              <div className="product" key={p.id}>
-                <figure>
-                  <img src={p.image} alt="" />
-                  <figcaption>{p.title}</figcaption>
-                  <p>{p.description}</p>
-                  <Link to={`/product/${p.id}`}>
-                    <button>See detail</button>
-                  </Link>
-                </figure>
-              </div>
-            )
-          })
-        : ""}
+      {products.map((p) => {
+        shortenTitle(p)
+        return (
+          <div className="product" key={p.id}>
+            <figure>
+              <img src={p.image} alt="" />
+              <figcaption>{p.title}</figcaption>
+              <p>{p.description}</p>
+              <Link to={`/product/${p.id}`}>
+                <button>See detail</button>
+              </Link>
+            </figure>
+          </div>
+        )
+      })}
     </div>
   )
 }

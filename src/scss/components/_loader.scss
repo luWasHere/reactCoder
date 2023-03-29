@@ -1,0 +1,35 @@
+.loaderContainer {
+  @include flex(initial, initial, center, center);
+  height: calc(100vh - 65px);
+  width: 100%;
+
+  .loader {
+    @include flex(initial, initial, center, center);
+    position: relative;
+    height: 80px;
+    width: 80px;
+    border: $lightmain 8px solid;
+    border-radius: 50%;
+    border-top: $titles 8px solid;
+    animation: loader 0.8s linear infinite;
+
+    .circle {
+      position: absolute;
+      height: 80px;
+      width: 80px;
+      border: transparent 8px solid;
+      border-top: $titles 8px solid;
+      border-radius: 50%;
+      filter: blur(15px) brightness(40%);
+    }
+
+    @keyframes loader {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+}

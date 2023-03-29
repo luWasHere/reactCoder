@@ -1,25 +1,18 @@
 import { useContext } from "react"
 import { CartContext } from "../../Context/CartContext"
+import { Link } from "react-router-dom"
 
 const Cart = () => {
-  const { cart, setCart } = useContext(CartContext)
+  const {
+    cart,
+    getTotalPrice,
+    setCart,
+    deleteProductById,
+    editProductQuantity,
+  } = useContext(CartContext)
 
-  const editQuantity = (id, operation) => {
-    let newCart = cart.map((e) => {
-      if (e.id === id) {
-        let edit = () => {
-          if (operation === "sum") {
-            return { ...e, quantity: e.quantity + 1 }
-          } else {
-            return { ...e, quantity: e.quantity - 1 }
-          }
-        }
-        let newValue = edit()
-        return newValue
-      }
-    })
-
-    setCart(newCart.filter((e) => e.quantity >= 1))
+  const resetCart = () => {
+    setCart([])
   }
 
   return (
@@ -29,33 +22,42 @@ const Cart = () => {
           {cart.map((e) => {
             return (
               <div className="cartProduct" key={e.id}>
-                <figure>
-                  <img src={e.image} alt="" />
-                  <figcaption>{e.title}</figcaption>
-                </figure>
+                <Link to={`/product/${e.id}`} className="link">
+                  <figure>
+                    <img src={e.image} alt="" />
+                    <figcaption>{e.title}</figcaption>
+                  </figure>
+                </Link>
                 <div className="quantityContainer">
                   <button
+                    className="delete"
+                    onClick={() => deleteProductById(e.id)}
+                  >
+                    <i className="fa-solid fa-trash"></i>
+                  </button>
+                  <button
                     className="rest"
-                    onClick={() => editQuantity(e.id, "rest")}
+                    onClick={() => editProductQuantity(e.id, "rest")}
                   >
                     -
                   </button>
                   <span className="quantity">{e.quantity}</span>
                   <button
                     className="sum"
-                    onClick={() => editQuantity(e.id, "sum")}
+                    onClick={() => editProductQuantity(e.id, "sum")}
                   >
                     +
                   </button>
                 </div>
-                <h2>${e.price}</h2>
+                <h2>${(e.price * e.quantity).toFixed(2)}</h2>
               </div>
             )
           })}
+          <span className="deleteAll" onClick={resetCart}>Delete all products</span>
           <div className="total">
             <h2>TOTAL</h2>
-            <span className="price">$100</span>
-            <button>PURCHASE</button>
+            <span className="price">${getTotalPrice().toFixed(2)}</span>
+            <button onClick={resetCart}>PURCHASE</button>
           </div>
         </>
       ) : (
