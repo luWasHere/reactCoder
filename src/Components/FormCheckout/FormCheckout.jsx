@@ -33,7 +33,7 @@ const FormCheckout = ({
       })
       .catch((err) => console.log(err))
 
-    cart.map((p) => {
+    cart.forEach((p) => {
       let refDoc = doc(db, "products", p.id)
       updateDoc(refDoc, { stock: p.stock - p.quantity })
     })

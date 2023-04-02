@@ -56,7 +56,7 @@ const Cart = () => {
         </div>
       ) : (
         <div className="cartContainer">
-          {cart.length != 0 ? (
+          {cart.length !== 0 ? (
             <>
               {cart.map((e) => {
                 return (
