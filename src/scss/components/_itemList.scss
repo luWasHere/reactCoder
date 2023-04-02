@@ -7,6 +7,7 @@
 }
 
 .categoryTitle {
+  animation: transitionZoom 0.3s linear;
   width: fit-content;
   margin: 40px auto 0px auto;
   color: $titles;
