@@ -1,7 +1,32 @@
 @mixin flex($dir, $wrap, $justifyC, $alignI) {
-    display: flex;
-    flex-direction: $dir;
-    flex-wrap: $wrap;
-    justify-content: $justifyC;
-    align-items: $alignI;
+  display: flex;
+  flex-direction: $dir;
+  flex-wrap: $wrap;
+  justify-content: $justifyC;
+  align-items: $alignI;
+}
+
+@mixin btnGreen {
+  @include flex(initial, initial, center, center);
+  margin-top: 10px;
+  width: fit-content;
+  outline: none;
+  border: none;
+  padding: 10px;
+  background: rgb(15, 85, 15);
+  color: #ddd;
+  cursor: pointer;
+  font-weight: 800;
+  border-radius: 6px;
+
+  &:hover {
+    filter: brightness(110%);
+    transition: all 0.2s;
+  }
+}
+
+@mixin btnGray {
+  @include btnGreen;
+  background-color: rgb(19, 21, 27);
+  color: #ccc;
 }

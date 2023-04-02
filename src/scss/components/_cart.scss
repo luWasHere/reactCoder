@@ -1,4 +1,5 @@
 .cartContainer {
+  animation: transitionLeft linear 0.4s;
   @include flex(column, initial, center, center);
   gap: 16px;
   width: 900px;
@@ -116,22 +117,40 @@
       font-weight: 800;
     }
 
-    button {
-      margin-top: 10px;
-      width: 20%;
-      outline: none;
-      border: none;
-      padding: 10px;
-      background: rgb(15, 85, 15);
-      color: #ddd;
-      cursor: pointer;
-      font-weight: 800;
-      border-radius: 6px;
+    .setPayBtn {
+      @include btnGreen;
+      width: 25%;
+    }
+    .addMoreBtn {
+      @include btnGray;
+      text-decoration: none;
+      width: 25%;
+    }
+  }
+}
 
-      &:hover {
-        filter: brightness(110%);
-        transition: all 0.2s;
-      }
+.payFinishedContainer {
+  height: calc(100vh - 200px);
+  width: 100%;
+  @include flex(column, initial, center, center);
+  .payFinished {
+    @include flex(column, initial, center, center);
+    gap: 10px;
+    animation: transitionZoom 0.3s normal linear;
+    h1 {
+      width: fit-content;
+      color: $titles;
+      margin: 0;
+    }
+    .purchaseId {
+      @include flex(column, initial, center, center);
+      gap: 5px;
+      border-radius: 10px;
+    }
+    .buyMore {
+      margin-top: 20px;
+      @include btnGreen;
+      text-decoration: none;
     }
   }
 }

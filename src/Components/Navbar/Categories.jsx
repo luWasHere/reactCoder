@@ -1,35 +1,42 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import axios from "axios"
+import { collection, getDocs } from "firebase/firestore"
+import { db } from "../../firebaseConfig"
 
 const Categories = () => {
   const [categories, setCategories] = useState(null)
 
-  const allCategories = async (state) => {
-    const pet = await axios.get("https://fakestoreapi.com/products/categories")
-    state(pet.data)
-  }
-
   useEffect(() => {
-    allCategories(setCategories)
+    const itemsCollection = collection(db, "categories")
+    getDocs(itemsCollection).then((res) => {
+      let list = res.docs.map((c) => {
+        return {
+          ...c.data(),
+          id: c.id,
+        }
+      })
+      setCategories(list)
+    })
   }, [])
 
   return (
     <div className="categoriesContainer">
       <ul className="categories">
-        {categories != null
-          ? categories.map((c) => {
-              return (
-                <Link
-                  to={`/category/${c}`}
-                  style={{ textDecoration: "none", color: "#ddd" }}
-                  key={categories.indexOf(c)}
-                >
-                  <li>{c}</li>
-                </Link>
-              )
-            })
-          : ""}
+        {categories != null ? (
+          categories.map((c) => {
+            return (
+              <Link
+                to={`/category/${c.name}`}
+                style={{ textDecoration: "none", color: "#ddd" }}
+                key={c.id}
+              >
+                <li>{c.name}</li>
+              </Link>
+            )
+          })
+        ) : (
+          <span>Loading... Please wait</span>
+        )}
       </ul>
     </div>
   )

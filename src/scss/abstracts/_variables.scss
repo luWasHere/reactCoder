@@ -1,4 +1,42 @@
-$buttons: rgb(13, 22, 56);
-$darkmain: rgb(12, 20, 37);
+$darkmain: rgba(12, 20, 37, 0.267);
 $lightmain: rgb(13, 28, 58);
 $titles: rgb(157, 188, 255);
+
+@keyframes transitionZoom {
+  0% {
+    transform: scale(10%);
+    opacity: 0;
+  }
+  85% {
+    transform: scale(105%);
+  }
+  100% {
+    transform: scale(100%);
+    opacity: 1;
+  }
+}
+
+@keyframes transitionLeft {
+  0% {
+    transform: translateX(-50%);
+    opacity: 0;
+  }
+  80% {
+    transform: translateX(0%);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes transitionRight {
+  0% {
+    transform: translateX(50%);
+    opacity: 0;
+  }
+  80% {
+    transform: translateX(0%);
+  }
+  100% {
+    opacity: 1;
+  }
+}

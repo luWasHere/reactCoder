@@ -1,24 +1,12 @@
-import { useContext, useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-import axios from "axios"
+import { useState, useContext } from "react"
+import { ToastContainer, toast } from "react-toastify"
 import { CartContext } from "../../Context/CartContext"
-import Loader from "../Loader/Loader"
+import { useParams } from "react-router-dom"
 
-const Itemdetail = () => {
-  const [product, setProduct] = useState()
+const ItemDetail = ({ product }) => {
+  const { addToCart, cart } = useContext(CartContext)
 
   const params = useParams()
-
-  const { addToCart, cart, setQuantity } = useContext(CartContext)
-
-  const oneProduct = async (id, state) => {
-    const pet = await axios.get("https://fakestoreapi.com/products/" + id)
-    state(pet.data)
-  }
-
-  useEffect(() => {
-    oneProduct(params.id, setProduct)
-  }, [])
 
   const initialCount = () => {
     let item = cart.find((e) => params.id == e.id)
@@ -33,7 +21,21 @@ const Itemdetail = () => {
   const [quantityCounter, setQuantityCounter] = useState(initialCount())
 
   const onAdd = () => {
-    addToCart({ ...product, quantity: quantityCounter })
+    const p = { ...product, quantity: quantityCounter }
+    addToCart(p)
+
+    const notify = () =>
+      toast.success("Product added!", {
+        position: "bottom-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      })
+    notify()
   }
 
   const addStars = (rate) => {
@@ -63,10 +65,6 @@ const Itemdetail = () => {
           break
         }
     }
-  }
-
-  if (product == null) {
-    return <Loader />
   }
 
   return (
@@ -104,8 +102,21 @@ const Itemdetail = () => {
           </button>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        limit={3}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+        theme="dark"
+      />
     </div>
   )
 }
 
-export default Itemdetail
+export default ItemDetail

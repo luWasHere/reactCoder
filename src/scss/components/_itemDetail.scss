@@ -6,6 +6,7 @@
   margin: 40px auto 0 auto;
 
   .imgContainer {
+    animation: transitionLeft linear 0.4s;
     width: fit-content;
     height: 500px;
     border-radius: 14px;
@@ -21,6 +22,7 @@
   }
 
   .infoContainer {
+    animation: transitionRight linear 0.4s;
     position: relative;
     h1 {
       margin-bottom: 8px;
@@ -97,5 +99,19 @@
         cursor: default;
       }
     }
+  }
+}
+
+.errorNotFound {
+  animation: transitionZoom .3s linear;
+  @include flex(column, initial, center, center);
+  margin-top: 200px;
+  .errorBtn {
+    text-decoration: none;
+    @include btnGreen;
+  }
+  i {
+    font-size: 3rem;
+    margin-bottom: 10px;
   }
 }

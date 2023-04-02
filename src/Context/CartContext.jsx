@@ -1,10 +1,26 @@
-import { createContext, useState } from "react"
+import { createContext, useEffect, useState } from "react"
 
 export const CartContext = createContext()
 
 const CartContextProvider = ({ children }) => {
   const [cart, setCart] = useState([])
   const [quantity, setQuantity] = useState()
+
+  const lsSet = (c) => {
+    localStorage.setItem("cart", JSON.stringify(c))
+  }
+
+  const lsGet = () => {
+    if (localStorage.getItem("cart")) {
+      const lsCart = JSON.parse(localStorage.getItem("cart"))
+      setCart(lsCart)
+      setQuantity(
+        lsCart.reduce((acc, elem) => {
+          return acc + elem.quantity
+        }, 0)
+      )
+    }
+  }
 
   const addToCart = (product) => {
     let exists = isInCart(product.id)
@@ -19,21 +35,21 @@ const CartContextProvider = ({ children }) => {
       })
 
       setCart(newCart)
-      console.log(newCart)
       setQuantity(
         newCart.reduce((acc, elem) => {
           return acc + elem.quantity
         }, 0)
       )
+      lsSet(newCart)
     } else {
       let newCart = [...cart, product]
       setCart(newCart)
-      console.log(newCart)
       setQuantity(
         newCart.reduce((acc, elem) => {
           return acc + elem.quantity
         }, 0)
       )
+      lsSet(newCart)
     }
   }
 
@@ -46,7 +62,7 @@ const CartContextProvider = ({ children }) => {
       return acc + elem.quantity * elem.price
     }, 0)
 
-    return total
+    return total.toFixed(2)
   }
 
   const deleteProductById = (id) => {
@@ -57,6 +73,7 @@ const CartContextProvider = ({ children }) => {
         return acc + elem.quantity
       }, 0)
     )
+    lsSet(newCart)
   }
 
   const editProductQuantity = (id, operation) => {
@@ -82,7 +99,12 @@ const CartContextProvider = ({ children }) => {
         return acc + elem.quantity
       }, 0)
     )
+    lsSet(newCart)
   }
+
+  useEffect(() => {
+    lsGet()
+  }, [])
 
   let data = {
     cart,
@@ -93,6 +115,8 @@ const CartContextProvider = ({ children }) => {
     getTotalPrice,
     deleteProductById,
     editProductQuantity,
+    lsSet,
+    lsGet,
   }
 
   return <CartContext.Provider value={data}>{children}</CartContext.Provider>

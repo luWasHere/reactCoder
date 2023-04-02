@@ -1,6 +1,6 @@
 import CartWidget from "./CartWidget"
-import { Link } from "react-router-dom"
 import Categories from "./Categories"
+import { Link } from "react-router-dom"
 
 const Navbar = () => {
   return (
