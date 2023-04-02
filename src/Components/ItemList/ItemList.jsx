@@ -14,24 +14,40 @@ export const shortenTitle = (p) => {
   }
 }
 
-const ItemList = ({ products }) => {
+const ItemList = ({ products, categoryName }) => {
+  const categoryTitle = () => {
+    let title
+    if (categoryName === undefined) {
+      title = "CHECK ALL OUR PRODUCTS"
+    } else {
+      title = categoryName.toUpperCase()
+    }
+    return title
+  }
   return (
-    <div className="products">
-      {products.map((p) => {
-        shortenTitle(p)
-        return (
-          <div className="product" key={p.id}>
-            <figure>
-              <img src={p.image} alt="" />
-              <figcaption>{p.title}</figcaption>
-              <p>{p.description}</p>
-              <Link to={`/product/${p.id}`}>
-                <button>See detail</button>
-              </Link>
-            </figure>
-          </div>
-        )
-      })}
+    <div>
+      <img
+        src={process.env.PUBLIC_URL + "/img/elpepestorebanner.jpg"}
+        className="banner"
+      />
+      <h1 className="categoryTitle">{categoryTitle()}</h1>
+      <div className="products">
+        {products.map((p) => {
+          shortenTitle(p)
+          return (
+            <div className="product" key={p.id}>
+              <figure>
+                <img src={p.image} alt="" />
+                <figcaption>{p.title}</figcaption>
+                <p>{p.description}</p>
+                <Link to={`/product/${p.id}`}>
+                  <button>See detail</button>
+                </Link>
+              </figure>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }

@@ -1,7 +1,21 @@
+.banner {
+  width: 100%;
+  height: 60vh;
+  object-fit: cover;
+  opacity: 0.8;
+  animation: transitionLeft 0.3s linear;
+}
+
+.categoryTitle {
+  width: fit-content;
+  margin: 40px auto 0px auto;
+  color: $titles;
+}
+
 .products {
   animation: transitionZoom 0.3s linear;
   margin-top: 40px;
-  margin-bottom: 40px;
+  margin-bottom: 100px;
   @include flex(row, wrap, center, flex-start);
   gap: 30px;
 

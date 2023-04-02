@@ -35,7 +35,7 @@ const ItemListContainer = () => {
     return <Loader />
   }
 
-  return <ItemList products={products} />
+  return <ItemList products={products} categoryName={categoryName}/>
 }
 
 export default ItemListContainer
